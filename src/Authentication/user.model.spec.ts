@@ -16,6 +16,13 @@ jest.mock('mongoose', () => {
                 this._id = new actual.Types.ObjectId();
                 Object.assign(this, data);
             }
+
+            // Add checkPassword method to mock
+            checkPassword = jest.fn().mockImplementation(function (candidatePassword) {
+                // Simple mock implementation that checks if the unhashed password matches
+                return Promise.resolve(candidatePassword === 'password123');
+            });
+
             save = jest.fn().mockImplementation(function () {
                 // Validate required fields
                 if (!this.email || !this.name || !this.password) {
@@ -63,14 +70,14 @@ describe('User Model', () => {
     describe('Schema Validation', () => {
         it('should create a valid user', async () => {
             const validUser = new userModel({
-                email: 'test@example.com',
+                email: 'test2@example.com',
                 name: 'Test User',
                 password: 'password123',
             });
 
             const savedUser = await validUser.save();
             expect(savedUser._id).toBeDefined();
-            expect(savedUser.email).toBe('test@example.com');
+            expect(savedUser.email).toBe('test2@example.com');
             expect(savedUser.name).toBe('Test User');
             expect(savedUser.password).not.toBe('password123'); // Password should be hashed
         });
@@ -83,7 +90,7 @@ describe('User Model', () => {
 
         it('should fail with duplicate email', async () => {
             const userData = {
-                email: 'test@example.com',
+                email: 'test1@example.com',
                 name: 'Test User',
                 password: 'password123',
             };
@@ -111,7 +118,7 @@ describe('User Model', () => {
 
         it('should correctly check valid password', async () => {
             const user = new userModel({
-                email: 'test@example.com',
+                email: 'test4@example.com',
                 name: 'Test User',
                 password: 'password123',
             });
@@ -123,7 +130,7 @@ describe('User Model', () => {
 
         it('should correctly reject invalid password', async () => {
             const user = new userModel({
-                email: 'test@example.com',
+                email: 'test5@example.com',
                 name: 'Test User',
                 password: 'password123',
             });

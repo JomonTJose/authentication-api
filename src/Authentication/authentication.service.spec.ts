@@ -83,7 +83,7 @@ describe('AuthenticationService', () => {
 
       const result = await service.register(createUserDto);
 
-      expect(result).toHaveProperty('token');
+      expect(result).toHaveProperty('accessToken');
       expect(result.message).toBe('User registered successfully');
     });
 
