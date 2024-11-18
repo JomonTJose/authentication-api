@@ -35,3 +35,8 @@ There are no e2e tests for this project.
 $ yarn run test:cov
 ```
 
+## Swagger
+
+```bash
+Swagger UI will be available at http://localhost:3009/api/docs
+```
