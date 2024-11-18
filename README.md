@@ -9,13 +9,7 @@ $ yarn install
 ## Running the app
 
 ```bash
-$ Add the below environment variables in .env file:
-MONGODB_URI="mongodb://localhost:27017" # MongoDB URI
-NODE_ENV=development # Node environment
-PORT=3009 # Port number
-HOST=127.0.0.1 # Host
-LOG_LEVEL=error/info/debug # Log level
-JWT_SECRET='easy-generator-secret' # JWT secret
+$ Add the environment variables in .env file shared
 ```
 
 ```bash
